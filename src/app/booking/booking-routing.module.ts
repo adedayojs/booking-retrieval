@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { BookingDetailComponent } from './booking-detail/booking-detail.component';
 import { CheckInComponent } from './check-in/check-in.component';
 

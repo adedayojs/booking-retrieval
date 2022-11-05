@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ApolloQueryResult } from '@apollo/client/core';
 
+import { ApolloQueryResult } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 
 import {
@@ -12,7 +12,6 @@ import {
 } from 'src/app/graphql/graphql.queries';
 import { UiAlertComponent } from 'src/app/shared/components/ui-alert/ui-alert.component';
 import { BookingService } from 'src/app/shared/services/booking.service';
-
 import { ValidNumbersValidator } from 'src/app/shared/validators/numbers-validator';
 
 @Component({

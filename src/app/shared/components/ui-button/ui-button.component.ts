@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'ui-button',
@@ -32,7 +37,13 @@ export class UiButtonComponent {
    *
    */
 
-  @Input() textColor: 'dark' | 'primary' | 'danger' | 'grey' | 'secondary' | 'light' = 'primary';
+  @Input() textColor:
+    | 'dark'
+    | 'primary'
+    | 'danger'
+    | 'grey'
+    | 'secondary'
+    | 'light' = 'primary';
   /**
    * The type attribute of the button tag
    * Firefox have some problem with submit button cause html also have attribute type.

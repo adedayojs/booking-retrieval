@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, ControlContainer, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, ControlContainer, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ui-input',

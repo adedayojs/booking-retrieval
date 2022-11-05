@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { BehaviorSubject, Subject } from 'rxjs';
+
 import { IBooking } from '../model/booking.model';
 
 @Injectable({
