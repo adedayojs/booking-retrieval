@@ -24,7 +24,7 @@
             </div>
 
             <div class="row my-4">
-                <ui-button textColor="light" color="danger" class="col-12 col-sm-6 m-auto">Retrieve Booking</ui-button>
+                <ui-button [isDisabled]="form.invalid" (click)="search()" textColor="light" color="danger" class="col-12 col-sm-6 m-auto">Retrieve Booking</ui-button>
             </div>
 
         </form>
