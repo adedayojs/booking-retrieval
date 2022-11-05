@@ -5,7 +5,8 @@
     'btn-' + size,
     'd-flex',
     'justify-content-center',
-    'align-items-center'
+    'align-items-center',
+    'w-100'
   ]" [disabled]="isDisabled">
     <ng-container [ngSwitch]="iconName">
         <i *ngSwitchCase="'back'" [class]="['text-' + textColor]" class="navigate-back fas fa-arrow-left"></i>
