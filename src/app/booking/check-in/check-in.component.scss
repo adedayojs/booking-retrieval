@@ -1,0 +1,25 @@
+@import "src/styles/scss/variables";
+@import "src/styles/scss/breakpoints";
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  &__container {
+    margin: 60px auto;
+    padding: 30px;
+
+    @include media-breakpoint-up(sm) {
+      border: 1px $color-primary solid;
+      width: 40%;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

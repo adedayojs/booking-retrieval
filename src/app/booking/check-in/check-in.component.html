@@ -1,2 +1,32 @@
 <app-header title="check-in"></app-header>
-<h2>hery</h2>
+<main>
+    <div class="card__container">
+        <h1 class="card__header">
+            Retrieve your Booking
+        </h1>
+
+        <p class="card__info">
+            You can find your booking by filling out
+            your family name and the booking code
+            in your booking confirmation.
+        </p>
+
+        <form [formGroup]="form">
+            <div class="mb-1 row">
+                <div class="pr-0 my-2 col-12">
+                    <ui-input label="Booking code" controlName="bookingCode" placeHolder="e.g 5FSDF5"
+                        [errorMessages]="errors.bookingCode"></ui-input>
+                </div>
+                <div class="pr-0 my-2 col-12">
+                    <ui-input label="Family name" controlName="familyName" placeHolder="e.g Giliard"
+                        [errorMessages]="errors.familyName"></ui-input>
+                </div>
+            </div>
+
+            <div class="row">
+                <ui-button textColor="light" color="danger" class="col-6 m-auto">Retrieve Booking</ui-button>
+            </div>
+
+        </form>
+    </div>
+</main>

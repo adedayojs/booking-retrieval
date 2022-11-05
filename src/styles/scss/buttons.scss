@@ -14,7 +14,7 @@ $transition-speed: 0.3s;
   outline: none;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  padding: 1rem 3rem;
+  padding: 0.5rem 0.5rem;
 
   @include transition(background-color $transition-speed, color $transition-speed, box-shadow $transition-speed);
 

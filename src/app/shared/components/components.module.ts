@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonComponent } from './button/button.component';
-import { InputComponent } from './input/input.component';
 import { HeaderComponent } from './header/header.component';
+import { UiInputComponent } from './ui-input/ui-input.component';
+import { UiButtonComponent } from './ui-button/ui-button.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ButtonComponent, InputComponent, HeaderComponent],
-  imports: [CommonModule],
-  exports: [ButtonComponent, InputComponent, HeaderComponent],
+  declarations: [HeaderComponent, UiInputComponent, UiButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [UiButtonComponent, UiInputComponent, HeaderComponent],
 })
 export class ComponentsModule {}

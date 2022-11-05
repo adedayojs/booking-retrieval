@@ -1,30 +1,38 @@
-$color-success: #ea40a9;
-$color-primary: #ea40a9;
-$color-primary-transparent: rgba(28, 212, 156, 0.15);
-$color-primary-light: #f84eb7;
+$color-success: rgb(64, 234, 109);
+
+$color-primary: rgb(08, 16, 55);
+$color-primary-light:rgb(47, 64, 146);
+$color-primary-transparent: rgba(08, 16, 55, 0.15);
+
 $color-secondary: #223b55;
 $color-secondary-light: #315479;
-$color-danger: #fc0883;
-$color-dark-transparent: rgba(97, 116, 135, 0.3);
-$color-danger-light: #fd3a9c;
-$color-danger-transparent: rgba(252, 8, 131, 0.15);
+
+$color-danger: rgb(194, 42, 29);
+$color-danger-light:rgb(200, 82, 72);
+$color-danger-transparent: rgba(194, 43, 29, 0.781);
+
+
 $color-warning: #daae10;
 $color-warning-light: #ffa033;
+
 $color-info: #1684f1;
 $color-info-light: #469df4;
+
 $color-dark: #617487;
 $color-dark-light: #7b8ea0;
+$color-dark-transparent: rgba(97, 116, 135, 0.3);
+
 $color-light: #fff;
-$font-family-regular: 'Montserrat-Regular';
-$font-family-medium: 'Montserrat-Medium';
-$font-family-bold: 'Montserrat-SemiBold';
+$font-family-regular: "Montserrat-Regular";
+$font-family-medium: "Montserrat-Medium";
+$font-family-bold: "Montserrat-SemiBold";
 $backdrop-modal-color: rgb(50, 73, 96, 0.9);
 $color-body-font: #223b55;
 $color-blue-light: #f6f9fc;
-$font-awesome-free-icon: 'Font Awesome 5 Free';
+$font-awesome-free-icon: "Font Awesome 5 Free";
 $color-shadow: rgba(0, 0, 0, 0.2);
 $color-white: #fff;
-$border-color: #7b8ea0;
+$border-color: rgb(192, 192, 192);
 $hover-color: rgb(238, 244, 249, 0.5);
 $background-color: #eff7fb;
 $color-blue: #00c3ce;
@@ -73,12 +81,12 @@ $spacers: map-merge(
 );
 
 $theme-colors: (
-  'primary': $color-primary,
-  'secondary': $color-secondary,
-  'success': $color-success,
-  'info': $color-info,
-  'warning': $color-warning,
-  'danger': $color-danger,
-  'light': $color-light,
-  'dark': $color-dark,
+  "primary": $color-primary,
+  "secondary": $color-secondary,
+  "success": $color-success,
+  "info": $color-info,
+  "warning": $color-warning,
+  "danger": $color-danger,
+  "light": $color-light,
+  "dark": $color-dark,
 );
