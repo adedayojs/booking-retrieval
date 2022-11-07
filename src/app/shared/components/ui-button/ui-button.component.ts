@@ -58,23 +58,9 @@ export class UiButtonComponent {
    */
   @Input() textWeight: 'bold' | 'regular' = 'bold';
 
-  /**
-   * The name of the icon is a key from the iconFilesMap property.
-   *
-   */
-  @Input() iconName?: 'google' | 'linkedin' | 'back' | 'next';
-
-  /**
-   * A map containing all icon file names from the button icons folder.
-   *
-   */
+ 
   // to disable button property
   @Input() isDisabled = false;
-
-  iconFilesMap: { [key: string]: string } = {
-    google: 'logo-google.svg',
-    linkedin: 'logo-linkedin.svg',
-  };
 
   constructor() {}
 }

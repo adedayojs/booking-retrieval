@@ -1,7 +1,8 @@
-<div [class]="['form-group', 'form-group-' + backgroundColor]" [formGroup]="parentForm"
+<div data-test-id="input-container" [class]="['form-group', 'form-group-' + backgroundColor]" [formGroup]="parentForm"
     [class.has-error]="formControl.invalid && formControl.touched">
-    <label [for]="controlName">{{ label }}</label>
-    <input [type]="type" [name]="controlName" [formControlName]="controlName" [class.not-empty]="formControl.value" />
+    <label data-test-id="label" [for]="controlName">{{ label }}</label>
+    <input data-test-id="input" [type]="type" [name]="controlName" [formControlName]="controlName"
+        [class.not-empty]="formControl.value" />
 
     <ng-container *ngFor="let messageKey of errorMessageKeys">
         <p class="error-item" *ngIf="formControl.hasError(messageKey) && formControl.touched">

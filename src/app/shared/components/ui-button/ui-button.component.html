@@ -1,4 +1,4 @@
-<button [type]="buttonType" [class]="[
+<button data-test-id="button" [type]="buttonType" [class]="[
     'btn',
     'btn-' + color,
     'btn-' + shape,
@@ -8,16 +8,7 @@
     'align-items-center',
     'w-100'
   ]" [disabled]="isDisabled">
-    <ng-container [ngSwitch]="iconName">
-        <i *ngSwitchCase="'back'" [class]="['text-' + textColor]" class="navigate-back fas fa-arrow-left"></i>
-        <i *ngSwitchCase="'next'" class="order-1 navigate-next fas fa-arrow-right"></i>
-        <i *ngSwitchCase="'search'" class="fas fa-search"></i>
-        <i *ngSwitchCase="'chevron-left'" class="fas fa-chevron-left"></i>
-        <ng-container *ngIf="iconName">
-            <img *ngSwitchDefault class="social" src="assets/images/button-icons/{{ iconFilesMap[iconName] }}" />
-        </ng-container>
-    </ng-container>
-    <span class="btn-text" [class]="['text-' + textColor, 'text-' + textWeight]">
+    <span data-test-id="button-text" class="btn-text" [class]="['text-' + textColor, 'text-' + textWeight]">
         <ng-content></ng-content>
     </span>
 </button>
