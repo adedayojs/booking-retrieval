@@ -81,13 +81,14 @@ export class CheckInComponent implements OnInit, OnDestroy {
   search() {
     this.apollo
       .watchQuery({
-        query: GET_BOOKING,
+        query: GET_BOOKING_Search,
         variables: {
           bookingFilter: {
             bookingCode: this.form.controls['bookingCode'].value,
-            passengers: {
-              firstName: this.form.controls['familyName'].value,
-            },
+            //  TODO: Fix search by firstName
+            // passengers: {
+            //   firstName: this.form.controls['familyName'].value,
+            // },
           },
         },
       })
