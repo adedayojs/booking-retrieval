@@ -1,7 +1,7 @@
 <app-header title="check-in"></app-header>
 <main>
     <div class="card__container">
-        <h1 class="card__header">
+        <h1 role="heading" class="card__header">
             Retrieve your Booking
         </h1>
 
@@ -11,20 +11,20 @@
             in your booking confirmation.
         </p>
 
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="search()">
             <div class="mb-1 row">
                 <div class="pr-0 my-2 col-12">
-                    <ui-input label="Booking code" controlName="bookingCode" placeHolder="e.g 5FSDF5"
+                    <ui-input aria-roledescription="Enter your booking code here" data-test-id="booking-code-input" label="Booking code" controlName="bookingCode" placeHolder="e.g 5FSDF5"
                         [errorMessages]="errors.bookingCode"></ui-input>
                 </div>
                 <div class="pr-0 my-2 col-12">
-                    <ui-input label="Family name" controlName="familyName" placeHolder="e.g Giliard"
+                    <ui-input data-test-id="family-name-input" label="Family name" controlName="familyName" placeHolder="e.g Giliard"
                         [errorMessages]="errors.familyName"></ui-input>
                 </div>
             </div>
 
             <div class="row my-4">
-                <ui-button [isDisabled]="form.invalid" (click)="search()" textColor="light" color="danger" class="col-12 col-sm-6 m-auto">Retrieve Booking</ui-button>
+                <ui-button data-test-id="form-submit-button" [isDisabled]="form.invalid" (click)="search()" textColor="light" color="danger" class="col-12 col-sm-6 m-auto">Retrieve Booking</ui-button>
             </div>
 
         </form>

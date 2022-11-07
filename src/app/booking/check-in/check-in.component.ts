@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { ApolloQueryResult } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
+import { takeWhile } from 'rxjs';
 
-import {
-  GET_BOOKING,
-  GET_BOOKING_Search,
-} from 'src/app/graphql/graphql.queries';
+import { GET_BOOKING, GET_BOOKING_Search } from 'src/app/graphql/graphql.queries';
 import { UiAlertComponent } from 'src/app/shared/components/ui-alert/ui-alert.component';
 import { BookingService } from 'src/app/shared/services/booking.service';
 import { ValidNumbersValidator } from 'src/app/shared/validators/numbers-validator';
@@ -19,8 +17,11 @@ import { ValidNumbersValidator } from 'src/app/shared/validators/numbers-validat
   templateUrl: './check-in.component.html',
   styleUrls: ['./check-in.component.scss'],
 })
-export class CheckInComponent implements OnInit {
+export class CheckInComponent implements OnInit, OnDestroy {
   form: FormGroup;
+
+  componentIsActive = true;
+
   errors = {
     bookingCode: {
       required: 'Booking code is required.',
@@ -42,51 +43,45 @@ export class CheckInComponent implements OnInit {
     private router: Router
   ) {
     this.form = fb.group({
-      bookingCode: [
-        '',
-        [
-          Validators.minLength(5),
-          Validators.maxLength(6),
-          Validators.required,
-          ValidNumbersValidator,
-        ],
-      ],
+      bookingCode: ['', [Validators.minLength(5), Validators.maxLength(6), Validators.required, ValidNumbersValidator]],
 
-      familyName: [
-        '',
-        [
-          Validators.minLength(2),
-          Validators.maxLength(30),
-          Validators.required,
-        ],
-      ],
+      familyName: ['', [Validators.minLength(2), Validators.maxLength(30), Validators.required]],
     });
   }
 
   ngOnInit(): void {}
-
-  search1() {
-    this.apollo
-      .watchQuery({
-        query: GET_BOOKING,
-      })
-      .valueChanges.subscribe((res: ApolloQueryResult<any>) => {
-        const bookings = res.data.allBookings as Array<any>;
-        if (bookings.length < 1) {
-          this.matDialog.open(UiAlertComponent, {
-            data: { title: 'Sorry We could not find this booking information' },
-          });
-        } else {
-          this.bookingService.setCurrentBooking(bookings[0]);
-          this.router.navigateByUrl('/bookings');
-        }
-      });
+  ngOnDestroy(): void {
+    this.componentIsActive = false;
   }
+
+  // search1() {
+  //   this.apollo
+  //     .watchQuery({
+  //       query: GET_BOOKING,
+  //     })
+  //     .valueChanges.pipe(takeWhile(() => this.componentIsActive))
+  //     .subscribe((res: ApolloQueryResult<any>) => {
+  //       const bookings = res.data.allBookings as Array<any>;
+  //       if (bookings.length < 1) {
+  //         this.matDialog.open(UiAlertComponent, {
+  //           data: { title: 'Sorry We could not find this booking information' },
+  //         });
+  //       } else {
+  //         this.bookingService.setCurrentBooking(bookings[0]);
+  //         const modalRef = this.matDialog.open(UiAlertComponent, {
+  //           data: { title: 'Match found', buttonConfig: { color: 'primary', textColor: 'light' } },
+  //         });
+  //         modalRef.afterClosed().subscribe((res) => {
+  //           this.router.navigateByUrl('/bookings');
+  //         });
+  //       }
+  //     });
+  // }
 
   search() {
     this.apollo
       .watchQuery({
-        query: GET_BOOKING_Search,
+        query: GET_BOOKING,
         variables: {
           bookingFilter: {
             bookingCode: this.form.controls['bookingCode'].value,
@@ -96,15 +91,33 @@ export class CheckInComponent implements OnInit {
           },
         },
       })
-      .valueChanges.subscribe((res: ApolloQueryResult<any>) => {
+      .valueChanges.pipe(takeWhile(() => this.componentIsActive))
+      .subscribe((res: ApolloQueryResult<any>) => {
         const bookings = res.data.allBookings as Array<any>;
         if (bookings.length < 1) {
           this.matDialog.open(UiAlertComponent, {
-            data: { title: 'Sorry We could not find this booking information' },
+            data: {
+              title: 'Sorry We could not find this booking information',
+              icon: 'info',
+              buttonConfig: { color: 'danger', textColor: 'light', buttonText: 'Close' },
+            },
           });
         } else {
-          this.bookingService.setCurrentBooking(bookings[0]);
-          this.router.navigateByUrl('/bookings');
+          this.bookingService.setCurrentBooking(bookings[0]); // Refactor this to take in multiple bookings later. We are only expecting a single booking associated with a booking code for now
+          const modalRef = this.matDialog.open(UiAlertComponent, {
+            data: {
+              title: 'Match found',
+              icon: 'check',
+              buttonConfig: { color: 'primary', textColor: 'light', buttonText: 'Proceed To Details' },
+            },
+            minWidth: '400px',
+          });
+          modalRef
+            .afterClosed()
+            .pipe(takeWhile(() => this.componentIsActive))
+            .subscribe((res) => {
+              this.router.navigateByUrl('/bookings');
+            });
         }
       });
   }

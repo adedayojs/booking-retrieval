@@ -1,13 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  ControlContainer,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { UiInputComponent } from './ui-input.component';
@@ -25,9 +18,7 @@ describe('UiInputComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [UiInputComponent],
       imports: [FormsModule, ReactiveFormsModule],
-      providers: [
-        { provide: ControlContainer, useValue: controlContainerMock },
-      ],
+      providers: [{ provide: ControlContainer, useValue: controlContainerMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UiInputComponent);
@@ -45,9 +36,7 @@ describe('UiInputComponent', () => {
     });
 
     it('Should have a container', () => {
-      const container = debugElement.query(
-        By.css('[data-test-id="input-container"]')
-      );
+      const container = debugElement.query(By.css('[data-test-id="input-container"]'));
 
       expect(container).toBeTruthy();
     });
@@ -75,32 +64,11 @@ describe('UiInputComponent', () => {
     expect(container.attributes['type']).toBe('text');
   });
 
-  describe('Test Initial value', () => {
-    it('input container should have form-group class', () => {
-      const container = debugElement.query(
-        By.css('[data-test-id="input-container"]')
-      );
-      expect(container.classes['form-group']).toBeTruthy();
-    });
-
-    it('input container should not have error class', () => {
-      const container = debugElement.query(
-        By.css('[data-test-id="input-container"]')
-      );
-
-      expect(container.nativeElement.getAttribute('class')).not.toContain(
-        'has-error'
-      );
-    });
-  });
-
   describe('Test final value when input is valid', () => {
     const testValue = 'ade';
 
     beforeEach(async () => {
-      const nativeElement = debugElement.query(
-        By.css('[data-test-id="input"]')
-      ).nativeElement;
+      const nativeElement = debugElement.query(By.css('[data-test-id="input"]')).nativeElement;
       nativeElement.value = testValue;
 
       nativeElement.dispatchEvent(new Event('focus'));
@@ -125,9 +93,7 @@ describe('UiInputComponent', () => {
     const testValue = '';
 
     beforeEach(async () => {
-      const nativeElement = debugElement.query(
-        By.css('[data-test-id="input"]')
-      ).nativeElement;
+      const nativeElement = debugElement.query(By.css('[data-test-id="input"]')).nativeElement;
       nativeElement.value = testValue;
 
       nativeElement.dispatchEvent(new Event('focus'));
@@ -149,11 +115,46 @@ describe('UiInputComponent', () => {
     });
 
     it('container div should have has-error class', () => {
-      const { nativeElement } = debugElement.query(
-        By.css('[data-test-id="input-container"]')
-      );
+      const { nativeElement } = debugElement.query(By.css('[data-test-id="input-container"]'));
 
       expect(nativeElement.getAttribute('class')).toContain('has-error');
     });
+  });
+});
+
+describe('Test Initial value', () => {
+  let component: UiInputComponent;
+  let fixture: ComponentFixture<UiInputComponent>;
+  let debugElement: DebugElement;
+  let form = new FormGroup({
+    firstControl: new FormControl('', Validators.required),
+  });
+  const controlContainerMock = { control: form };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [UiInputComponent],
+      imports: [FormsModule, ReactiveFormsModule],
+      providers: [{ provide: ControlContainer, useValue: controlContainerMock }],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(UiInputComponent);
+    component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
+    component.controlName = 'firstControl';
+    component.type = 'text';
+
+    fixture.detectChanges();
+  });
+  
+  it('input container should have form-group class', () => {
+    const container = debugElement.query(By.css('[data-test-id="input-container"]'));
+    expect(container.classes['form-group']).toBeTruthy();
+  });
+
+  it('input container should not have error class', () => {
+    const container = debugElement.query(By.css('[data-test-id="input-container"]'));
+
+    expect(container.nativeElement.getAttribute('class')).not.toContain('has-error');
   });
 });

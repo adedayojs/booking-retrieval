@@ -2,13 +2,21 @@
 @import "src/styles/scss/breakpoints";
 
 .booking-details-container {
-  background: #ffffff;  
+  background: #ffffff;
   margin: 60px auto;
-  
+
   @include media-breakpoint-up(sm) {
     border-radius: 8px;
     border: 1px $color-primary solid;
     width: 80%;
+  }
+}
+
+.home-link {
+  @include media-breakpoint-up(sm) {
+    position: relative;
+    bottom: 20px;
+    text-decoration: none;
   }
 }
 

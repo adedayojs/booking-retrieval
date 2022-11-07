@@ -4,6 +4,9 @@ const GET_BOOKING = gql`
   query {
     allBookings {
       bookingCode
+      contactDetails
+      itinerary
+      passengers
     }
   }
 `;

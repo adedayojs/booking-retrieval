@@ -1,12 +1,167 @@
 <app-header title="Booking Detail"></app-header>
-<div class="booking-details-container">
+
+<div class="booking-details-container" *ngIf="booking">
+
+    <a role="generic" class="d-flex justify-content-center align-items-center home-link " routerLink="/">
+        <mat-icon>chevron_left</mat-icon>
+        Search for another booking
+    </a>
     <div class="booking-details-element">
-        <p class="booking-details-element__header">booking image :</p>
-        <p class="booking-details-element__content">
-        </p>
-    </div>
-    <div class="booking-details-element">
-        <p class="booking-details-element__header">Code</p>
+        <p class="booking-details-element__header">Booking Code:</p>
         <p class="booking-details-element__content">{{booking.bookingCode}}</p>
     </div>
+    <div class="booking-details-element">
+        <p class="booking-details-element__header">Passanger name:</p>
+        <p class="booking-details-element__content">{{booking.passengers.title.name}}. {{booking.passengers.firstName}}
+            {{booking.passengers.lastName}}</p>
+    </div>
+
+
+    <mat-accordion>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Contact Details
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="booking-details-element" *ngFor="let detail of booking.contactDetails">
+                <p class="booking-details-element__header">{{detail['@class']}}:</p>
+                <p class="booking-details-element__content">{{detail.address}}
+                    {{booking.passengers.lastName}}</p>
+            </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Itinerary
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="booking-details-element">
+                <p class="booking-details-element__header">Type:</p>
+                <p class="booking-details-element__content">{{booking.itinerary.type}}</p>
+            </div>
+
+            <!-- Connections -->
+            <mat-expansion-panel *ngFor="let connection of booking.itinerary.connections">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Connection
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{connection.origin.name}} to {{connection.destination.name}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="booking-details-element">
+                    <p class="booking-details-element__header">Origin City:</p>
+                    <p class="booking-details-element__content">{{connection.origin.city.name}}</p>
+                </div>
+                <div class="booking-details-element">
+                    <p class="booking-details-element__header">Origin Country:</p>
+                    <p class="booking-details-element__content">{{connection.origin.city.country.name}}</p>
+                </div>
+                <div class="booking-details-element">
+                    <p class="booking-details-element__header">Destination City:</p>
+                    <p class="booking-details-element__content">{{connection.destination.city.name}}</p>
+                </div>
+                <div class="booking-details-element">
+                    <p class="booking-details-element__header">Destination Country:</p>
+                    <p class="booking-details-element__content">{{connection.destination.city.country.name}}</p>
+                </div>
+                <div class="booking-details-element">
+                    <p class="booking-details-element__header">Flight Duration:</p>
+                    <p class="booking-details-element__content">{{connection.duration}} Minutes</p>
+                </div>
+
+                <!-- Segment -->
+                <mat-expansion-panel *ngFor="let segment of connection.segments">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Journey Segments
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            From {{segment.departFrom.name}} to {{segment.arriveOn.name}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Depart Airport:</p>
+                        <p class="booking-details-element__content">{{segment.departFrom.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Depart City:</p>
+                        <p class="booking-details-element__content">{{segment.departFrom.city.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Depart Country:</p>
+                        <p class="booking-details-element__content">{{segment.departFrom.city.country.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Arrival Airport:</p>
+                        <p class="booking-details-element__content">{{segment.arriveOn.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Arrival City:</p>
+                        <p class="booking-details-element__content">{{segment.arriveOn.city.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Arrival Country:</p>
+                        <p class="booking-details-element__content">{{segment.arriveOn.city.country.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Type:</p>
+                        <p class="booking-details-element__content">{{segment.type}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">No Of Stops:</p>
+                        <p class="booking-details-element__content">{{segment.marketingFlight.numberOfStops}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Carrier:</p>
+                        <p class="booking-details-element__content">{{segment.marketingFlight.carrier.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Status:</p>
+                        <p class="booking-details-element__content">{{segment.marketingFlight.status.name}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Checkin Start:</p>
+                        <p class="booking-details-element__content">
+                            {{segment.marketingFlight.operatingFlight.checkInStart | date:'MMM dd YYYY, HH:MM'}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Checkin Ends:</p>
+                        <p class="booking-details-element__content">{{segment.marketingFlight.operatingFlight.checkInEnd
+                            | date:'MMM dd YYYY, HH:MM'}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Arrival:</p>
+                        <p class="booking-details-element__content">
+                            {{segment.marketingFlight.operatingFlight.scheduledArrival | date:'MMM dd YYYY, HH:MM'}}</p>
+                    </div>
+                    <div class="booking-details-element">
+                        <p class="booking-details-element__header">Flight Departure:</p>
+                        <p class="booking-details-element__content">
+                            {{segment.marketingFlight.operatingFlight.scheduledDeparture | date:'MMM dd YYYY, HH:MM'}}
+                        </p>
+                    </div>
+                </mat-expansion-panel>
+
+            </mat-expansion-panel>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+
+
 </div>
