@@ -49,46 +49,18 @@ export class CheckInComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   ngOnDestroy(): void {
     this.componentIsActive = false;
   }
 
-  // search1() {
-  //   this.apollo
-  //     .watchQuery({
-  //       query: GET_BOOKING,
-  //     })
-  //     .valueChanges.pipe(takeWhile(() => this.componentIsActive))
-  //     .subscribe((res: ApolloQueryResult<any>) => {
-  //       const bookings = res.data.allBookings as Array<any>;
-  //       if (bookings.length < 1) {
-  //         this.matDialog.open(UiAlertComponent, {
-  //           data: { title: 'Sorry We could not find this booking information' },
-  //         });
-  //       } else {
-  //         this.bookingService.setCurrentBooking(bookings[0]);
-  //         const modalRef = this.matDialog.open(UiAlertComponent, {
-  //           data: { title: 'Match found', buttonConfig: { color: 'primary', textColor: 'light' } },
-  //         });
-  //         modalRef.afterClosed().subscribe((res) => {
-  //           this.router.navigateByUrl('/bookings');
-  //         });
-  //       }
-  //     });
-  // }
-
   search() {
     this.apollo
       .watchQuery({
-        query: GET_BOOKING,
+        query: GET_BOOKING_Search,
         variables: {
-          bookingFilter: {
-            bookingCode: this.form.controls['bookingCode'].value,
-            passengers: {
-              firstName: this.form.controls['familyName'].value,
-            },
-          },
+          bookingCode: this.form.controls['bookingCode'].value,
+          lastName: this.form.controls['familyName'].value,
         },
       })
       .valueChanges.pipe(takeWhile(() => this.componentIsActive))
